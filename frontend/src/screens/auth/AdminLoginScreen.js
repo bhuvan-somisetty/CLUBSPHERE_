@@ -36,7 +36,7 @@ export default function AdminLoginScreen({ navigation }) {
 
       <View style={styles.header}>
         <View style={styles.iconRow}>
-          <MaterialCommunityIcons name="shield-check" size={28} color={theme.colors.secondary} style={styles.icon} />
+          <MaterialCommunityIcons name="shield-check" size={24} color={theme.colors.secondary} style={styles.icon} />
           <Text style={[styles.title, { color: theme.colors.text }]}>Admin Portal</Text>
         </View>
         <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
@@ -76,7 +76,7 @@ export default function AdminLoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   backButton: {
     alignSelf: 'flex-start',
-    marginBottom: 24,
+    marginBottom: 20,
     padding: 4,
   },
   header: {
@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   title: {
-    fontSize: 28,
-    fontWeight: '800',
+    fontSize: 24,
+    fontWeight: '700',
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 15,
   },
   error: {
     marginBottom: 16,

@@ -2,24 +2,24 @@ import { Platform } from 'react-native';
 
 export const theme = {
   colors: {
-    primary: '#6366f1',
-    primaryLight: '#e0e7ff',
-    secondary: '#10b981',
-    secondaryLight: '#d1fae5',
-    accent: '#f59e0b',
-    accentLight: '#fef3c7',
-    success: '#22c55e',
-    successLight: '#dcfce7',
-    warning: '#f59e0b',
-    warningLight: '#fef3c7',
-    background: '#f9fafb',
-    surface: '#ffffff',
-    text: '#1f2937',
-    textSecondary: '#6b7280',
-    border: '#e5e7eb',
-    error: '#ef4444',
-    errorLight: '#fee2e2',
-    inactive: '#9ca3af',
+    primary: '#4F46E5',
+    primaryLight: '#E0E7FF',
+    // Muted semantic colors to avoid bright/playful looks
+    success: '#10B981',
+    successLight: '#D1FAE5',
+    warning: '#F59E0B',
+    warningLight: '#FEF3C7',
+    error: '#EF4444',
+    errorLight: '#FEE2E2',
+    
+    // Light mode defaults
+    background: '#F5F7FB',
+    surface: '#FFFFFF',
+    card: '#FFFFFF',
+    border: '#E5E7EB',
+    text: '#111827',
+    textSecondary: '#6B7280',
+    inactive: '#9CA3AF',
   },
   spacing: {
     xs: 4,
@@ -37,24 +37,23 @@ export const theme = {
   },
   typography: {
     h1: {
-      fontSize: 40,
-      fontWeight: 'bold',
-      lineHeight: 48,
-    },
-    h2: {
       fontSize: 32,
       fontWeight: 'bold',
       lineHeight: 40,
     },
+    h2: {
+      fontSize: 28,
+      fontWeight: 'bold',
+      lineHeight: 36,
+    },
     h3: {
-      fontSize: 24,
+      fontSize: 20,
       fontWeight: '600',
-      lineHeight: 32,
+      lineHeight: 28,
     },
     body: {
-      fontSize: 16,
-      lineHeight: 24,
-      color: '#1f2937',
+      fontSize: 15,
+      lineHeight: 22,
     },
     small: {
       fontSize: 14,
@@ -67,33 +66,23 @@ export const theme = {
   },
   shadows: {
     small: Platform.select({
-      web: { boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.05)' },
+      web: { boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.05)' },
       default: {
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.05,
-        shadowRadius: 2,
+        shadowRadius: 3,
         elevation: 1,
       },
     }),
     medium: Platform.select({
-      web: { boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.08)' },
-      default: {
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.08,
-        shadowRadius: 4,
-        elevation: 2,
-      },
-    }),
-    large: Platform.select({
-      web: { boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.12)' },
+      web: { boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.05)' },
       default: {
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.12,
-        shadowRadius: 8,
-        elevation: 4,
+        shadowOpacity: 0.05,
+        shadowRadius: 6,
+        elevation: 3,
       },
     }),
   },
@@ -105,18 +94,15 @@ export const getTheme = (isDark = false) => {
       ...theme,
       colors: {
         ...theme.colors,
-        background: '#121212',
-        surface: '#1e1e1e',
-        text: '#ffffff',
-        textSecondary: '#a1a1aa',
-        border: '#333333',
-        primaryLight: '#312e81',
-        secondaryLight: '#064e3b',
-        errorLight: '#7f1d1d',
-        successLight: '#14532d',
-        warningLight: '#78350f',
-        accentLight: '#78350f',
-        inactive: '#52525b',
+        background: '#0B0F1A',
+        surface: '#121826',
+        card: '#1A2233',
+        border: '#2A3447',
+        text: '#E5E7EB',
+        textSecondary: '#9CA3AF',
+        
+        primaryLight: '#3730A3', // Darker shade for contrast
+        inactive: '#4B5563',
       }
     };
   }

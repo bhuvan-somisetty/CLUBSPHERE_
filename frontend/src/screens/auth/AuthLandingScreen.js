@@ -22,7 +22,7 @@ export default function AuthLandingScreen({ navigation }) {
 
       <View style={styles.header}>
         <View style={[styles.iconContainer, { backgroundColor: theme.colors.primaryLight }]}>
-          <MaterialCommunityIcons name="google-circles-extended" size={48} color={theme.colors.primary} />
+          <MaterialCommunityIcons name="google-circles-extended" size={32} color={theme.colors.primary} />
         </View>
         <Text style={[styles.title, { color: theme.colors.text }]}>ClubSphere</Text>
         <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
@@ -71,23 +71,23 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    marginBottom: 48,
+    marginBottom: 40,
   },
   iconContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 64,
+    height: 64,
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
   },
   title: {
-    fontSize: 32,
-    fontWeight: '800',
+    fontSize: 24,
+    fontWeight: '700',
     marginBottom: 8,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 15,
     textAlign: 'center',
   },
   buttonGroup: {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   mainButton: {
-    marginBottom: 16,
+    marginBottom: 12,
   },
   footer: {
     alignItems: 'center',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   linkText: {
-    fontSize: 16,
-    fontWeight: '700',
+    fontSize: 15,
+    fontWeight: '600',
   }
 });

@@ -20,7 +20,7 @@ function EventsStack() {
     <Stack.Navigator screenOptions={{ 
       headerShown: false,
       headerStyle: { backgroundColor: theme.colors.surface },
-      headerTintColor: theme.colors.primary,
+      headerTintColor: theme.colors.text,
     }}>
       <Stack.Screen name="EventsList" component={EventsScreen} />
       <Stack.Screen name="EventDetails" component={EventDetailsScreen} options={{ presentation: 'modal' }}/>
@@ -34,20 +34,20 @@ export default function StudentTabs() {
   return (
     <Tab.Navigator screenOptions={{
       tabBarActiveTintColor: theme.colors.primary,
-      tabBarInactiveTintColor: theme.colors.textSecondary,
-      headerStyle: { backgroundColor: theme.colors.surface, borderBottomColor: theme.colors.border, borderBottomWidth: 1 },
-      headerTintColor: theme.colors.primary,
-      headerTitleStyle: { fontWeight: '800', color: theme.colors.text },
-      tabBarStyle: { borderTopWidth: 1, borderTopColor: theme.colors.border, backgroundColor: theme.colors.surface },
+      tabBarInactiveTintColor: theme.colors.inactive,
+      headerStyle: { backgroundColor: theme.colors.surface, borderBottomColor: theme.colors.border, borderBottomWidth: 1, elevation: 0, shadowOpacity: 0 },
+      headerTintColor: theme.colors.text,
+      headerTitleStyle: { fontWeight: '600', fontSize: 18, color: theme.colors.text },
+      tabBarStyle: { borderTopWidth: 1, borderTopColor: theme.colors.border, backgroundColor: theme.colors.surface, elevation: 0, shadowOpacity: 0 },
       headerRight: () => (
         <TouchableOpacity 
           onPress={toggleTheme}
           style={{ marginRight: 16, padding: 8 }}
         >
           <MaterialCommunityIcons 
-            name={isDarkMode ? 'white-balance-sunny' : 'moon-waning-crescent'} 
+            name={isDarkMode ? 'weather-sunny' : 'weather-night'} 
             size={24} 
-            color={theme.colors.primary} 
+            color={theme.colors.textSecondary} 
           />
         </TouchableOpacity>
       ),

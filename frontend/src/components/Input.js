@@ -27,17 +27,17 @@ export default function Input({
       <View style={[
         styles.inputWrapper,
         { 
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.colors.surface,
           borderColor: error ? theme.colors.error : isFocused ? theme.colors.primary : theme.colors.border,
-          borderWidth: 1.5,
-          borderRadius: 28
+          borderWidth: 1,
+          borderRadius: 10
         }
       ]}>
         {leftIcon && (
           <MaterialCommunityIcons 
             name={leftIcon} 
-            size={20} 
-            color={isFocused ? theme.colors.primary : theme.colors.textSecondary} 
+            size={18} 
+            color={isFocused ? theme.colors.primary : theme.colors.inactive} 
             style={styles.leftIcon} 
           />
         )}
@@ -60,8 +60,8 @@ export default function Input({
           <TouchableOpacity onPress={togglePasswordVisibility} style={styles.rightIcon}>
             <MaterialCommunityIcons 
               name={isPasswordVisible ? 'eye-off-outline' : 'eye-outline'} 
-              size={20} 
-              color={theme.colors.textSecondary} 
+              size={18} 
+              color={theme.colors.inactive} 
             />
           </TouchableOpacity>
         )}
@@ -79,24 +79,24 @@ const styles = StyleSheet.create({
   inputWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    height: 56,
+    paddingHorizontal: 16,
+    height: 48,
   },
   input: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 15,
     height: '100%',
   },
   leftIcon: {
-    marginRight: 12,
+    marginRight: 10,
   },
   rightIcon: {
-    marginLeft: 12,
+    marginLeft: 10,
     padding: 4,
   },
   errorText: {
     fontSize: 12,
-    marginTop: 6,
-    marginLeft: 20,
+    marginTop: 4,
+    marginLeft: 4,
   }
 });

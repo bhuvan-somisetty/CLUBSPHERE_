@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Alert } from 'react-native';
 import { DataContext } from '../../context/DataContext';
 import { ThemeContext } from '../../context/ThemeContext';
 import Card from '../../components/Card';
@@ -47,58 +47,55 @@ export default function ClubsScreen() {
 
   const renderItem = ({ item }) => (
     <Card>
-      <View style={[styles.cardContainer, { backgroundColor: theme.colors.surface }]}>
-        {/* Header with icon and title */}
-        <View style={styles.cardHeader}>
-          <View style={[styles.iconBox, { backgroundColor: theme.colors.primaryLight }]}>
-            <MaterialCommunityIcons 
-              name={getIconForClub(item.name, item.icon)} 
-              size={32} 
-              color={theme.colors.primary} 
-            />
-          </View>
-          <View style={styles.headerText}>
-            <Text style={[styles.clubName, { color: theme.colors.text }]}>{item.name}</Text>
-            <View style={styles.memberBadge}>
-              <MaterialCommunityIcons name="account-multiple" size={14} color={theme.colors.primary} />
-              <Text style={[styles.memberCount, { color: theme.colors.textSecondary }]}>
-                {item.memberCount} members
-              </Text>
-            </View>
+      {/* Header with icon and title */}
+      <View style={styles.cardHeader}>
+        <View style={[styles.iconBox, { backgroundColor: theme.colors.primaryLight }]}>
+          <MaterialCommunityIcons 
+            name={getIconForClub(item.name, item.icon)} 
+            size={24} 
+            color={theme.colors.primary} 
+          />
+        </View>
+        <View style={styles.headerText}>
+          <Text style={[styles.clubName, { color: theme.colors.text }]}>{item.name}</Text>
+          <View style={styles.memberBadge}>
+            <MaterialCommunityIcons name="account-multiple" size={14} color={theme.colors.textSecondary} />
+            <Text style={[styles.memberCount, { color: theme.colors.textSecondary }]}>
+              {item.memberCount} members
+            </Text>
           </View>
         </View>
+      </View>
 
-        {/* Description */}
-        <Text style={[styles.description, { color: theme.colors.textSecondary }]}>
-          {item.description}
-        </Text>
+      {/* Description */}
+      <Text style={[styles.description, { color: theme.colors.textSecondary }]}>
+        {item.description}
+      </Text>
 
-        {/* Action Button */}
-        <View style={styles.buttonContainer}>
-          {item.joined ? (
-            <View style={{flexDirection: 'row', gap: theme.spacing.s}}>
-              <View style={[styles.joinedBadge, { backgroundColor: theme.colors.secondaryLight, flex: 1 }]}>
-                <MaterialCommunityIcons name="check-circle" size={18} color={theme.colors.secondary} />
-                <Text style={[styles.joinedText, { color: theme.colors.secondary }]}>Joined</Text>
-              </View>
-              <Button 
-                title="Leave" 
-                variant="outline" 
-                onPress={() => handleLeave(item.id)} 
-                loading={loadingId === item.id}
-                style={{ flex: 1 }}
-              />
+      {/* Action Button */}
+      <View style={styles.buttonContainer}>
+        {item.joined ? (
+          <View style={{flexDirection: 'row', gap: 12}}>
+            <View style={[styles.joinedBadge, { backgroundColor: theme.colors.successLight, flex: 1 }]}>
+              <MaterialCommunityIcons name="check-circle" size={18} color={theme.colors.success} />
+              <Text style={[styles.joinedText, { color: theme.colors.success }]}>Joined</Text>
             </View>
-          ) : (
             <Button 
-              title="Join Club" 
-              onPress={() => handleJoin(item.id)} 
-              loading={loadingId === item.id} 
-              icon="account-plus"
+              title="Leave" 
+              variant="outline" 
+              onPress={() => handleLeave(item.id)} 
+              loading={loadingId === item.id}
               style={{ flex: 1 }}
             />
-          )}
-        </View>
+          </View>
+        ) : (
+          <Button 
+            title="Join Club" 
+            onPress={() => handleJoin(item.id)} 
+            loading={loadingId === item.id} 
+            icon="account-plus"
+          />
+        )}
       </View>
     </Card>
   );
@@ -109,13 +106,13 @@ export default function ClubsScreen() {
         data={clubs}
         keyExtractor={item => item.id}
         renderItem={renderItem}
-        contentContainerStyle={{ padding: theme.spacing.m }}
+        contentContainerStyle={{ padding: 16 }}
         ListHeaderComponent={
-          <Text style={[styles.header, { color: theme.colors.text, marginBottom: theme.spacing.m }]}>
+          <Text style={[styles.header, { color: theme.colors.text, marginBottom: 16 }]}>
             Discover Clubs
           </Text>
         }
-        scrollIndicatorInsets={{ right: 1 }}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -125,22 +122,18 @@ const styles = StyleSheet.create({
   container: { 
     flex: 1,
   },
-  cardContainer: {
-    padding: 0,
-  },
   cardHeader: { 
     flexDirection: 'row', 
-    alignItems: 'flex-start',
-    paddingBottom: 12,
+    alignItems: 'center',
+    marginBottom: 12,
   },
   iconBox: { 
-    width: 60, 
-    height: 60, 
-    borderRadius: 16, 
+    width: 48, 
+    height: 48, 
+    borderRadius: 12, 
     justifyContent: 'center', 
     alignItems: 'center', 
     marginRight: 16,
-    marginBottom: 8,
   },
   headerText: { 
     flex: 1, 
@@ -148,7 +141,7 @@ const styles = StyleSheet.create({
   },
   clubName: {
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: '600',
     marginBottom: 4,
   },
   memberBadge: {
@@ -157,7 +150,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   memberCount: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '500',
   },
   description: {
@@ -166,7 +159,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   buttonContainer: {
-    marginTop: 12,
+    marginTop: 4,
   },
   joinedBadge: {
     flexDirection: 'row',
@@ -174,11 +167,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 12,
     paddingHorizontal: 16,
-    borderRadius: 8,
+    borderRadius: 10,
     gap: 6,
   },
   joinedText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
   },
   header: {

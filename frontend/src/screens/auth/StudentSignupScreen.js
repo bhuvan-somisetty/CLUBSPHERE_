@@ -108,7 +108,7 @@ export default function StudentSignupScreen({ navigation }) {
         />
 
         <View style={styles.footer}>
-          <Text style={{ color: theme.colors.textSecondary, marginBottom: 8 }}>
+          <Text style={{ color: theme.colors.textSecondary, marginBottom: 8, fontSize: 14 }}>
             Already have an account?
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate('StudentLogin')}>
@@ -125,6 +125,7 @@ export default function StudentSignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
+    paddingBottom: 24,
   },
   backButton: {
     alignSelf: 'flex-start',
@@ -135,12 +136,12 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   title: {
-    fontSize: 28,
-    fontWeight: '800',
+    fontSize: 24,
+    fontWeight: '700',
     marginBottom: 8,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 15,
   },
   error: {
     marginBottom: 16,
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   linkText: {
-    fontSize: 16,
-    fontWeight: '700',
+    fontSize: 15,
+    fontWeight: '600',
   }
 });

@@ -84,17 +84,17 @@ export default function AdminEventsScreen({ navigation }) {
   };
 
   const renderItem = ({ item }) => (
-    <Card style={styles.cardContainer}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: theme.spacing.s}}>
-        <Text style={theme.typography.h3} numberOfLines={1}>{item.title}</Text>
+    <Card>
+      <View style={styles.cardHeader}>
+        <Text style={[theme.typography.h3, { color: theme.colors.text }]} numberOfLines={1}>{item.title}</Text>
         <Badge label={item.date} status="primary" />
       </View>
-      <Text style={[theme.typography.caption, { color: theme.colors.textSecondary, marginBottom: theme.spacing.s }]}>📍 {item.venue} | 🕒 {item.time}</Text>
-      <Text style={theme.typography.body} numberOfLines={2}>{item.description}</Text>
+      <Text style={[theme.typography.caption, { color: theme.colors.textSecondary, marginBottom: 8 }]}>📍 {item.venue} | 🕒 {item.time}</Text>
+      <Text style={[theme.typography.body, { color: theme.colors.textSecondary }]} numberOfLines={2}>{item.description}</Text>
       
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: theme.spacing.m}}>
+      <View style={styles.cardActionsContainer}>
         <Button title="Attendance" size="small" variant="outline" onPress={() => navigation.navigate('EventAttendance', { eventId: item.id })} />
-        <View style={{flexDirection: 'row', gap: theme.spacing.s}}>
+        <View style={styles.cardActions}>
           <Button title="Edit" variant="outline" size="small" onPress={() => openEditModal(item)} />
           <Button title="Delete" variant="danger" size="small" onPress={() => handleDelete(item.id)} />
         </View>
@@ -108,29 +108,66 @@ export default function AdminEventsScreen({ navigation }) {
         data={events} 
         keyExtractor={c => c.id} 
         renderItem={renderItem} 
-        contentContainerStyle={{ padding: theme.spacing.m, paddingBottom: 100 }}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
       />
       
       <View style={styles.fabContainer}>
-         <Button title="Create Event" onPress={openCreateModal} icon="plus" style={{ borderRadius: 100 }} />
+         <Button title="Create Event" onPress={openCreateModal} icon="plus" style={styles.fabButton} />
       </View>
 
       <Modal visible={modalVisible} animationType="slide" transparent>
         <View style={styles.modalBg}>
           <ScrollView contentContainerStyle={styles.modalContent} showsVerticalScrollIndicator={false}>
-             <Text style={[theme.typography.h2, { marginBottom: theme.spacing.l }]}>{editingEvent ? 'Edit Event' : 'Schedule Event'}</Text>
+             <Text style={[theme.typography.h2, { marginBottom: 24, color: theme.colors.text }]}>{editingEvent ? 'Edit Event' : 'Schedule Event'}</Text>
              
-             <TextInput style={styles.input} placeholder="Event Title" value={title} onChangeText={setTitle} />
-             <TextInput style={[styles.input, { height: 80 }]} placeholder="Event Description..." value={desc} onChangeText={setDesc} multiline />
-             <View style={{flexDirection: 'row', gap: theme.spacing.s}}>
-                <TextInput style={[styles.input, {flex: 1}]} placeholder="Date (MM-DD)" value={date} onChangeText={setDate} />
-                <TextInput style={[styles.input, {flex: 1}]} placeholder="Time (10AM)" value={time} onChangeText={setTime} />
+             <TextInput 
+                style={[styles.input, { backgroundColor: theme.colors.background, borderColor: theme.colors.border, color: theme.colors.text }]} 
+                placeholder="Event Title" 
+                placeholderTextColor={theme.colors.inactive}
+                value={title} 
+                onChangeText={setTitle} 
+             />
+             <TextInput 
+                style={[styles.input, { height: 100, backgroundColor: theme.colors.background, borderColor: theme.colors.border, color: theme.colors.text }]} 
+                placeholder="Event Description..." 
+                placeholderTextColor={theme.colors.inactive}
+                value={desc} 
+                onChangeText={setDesc} 
+                multiline 
+             />
+             <View style={styles.rowInputs}>
+                <TextInput 
+                   style={[styles.input, {flex: 1, backgroundColor: theme.colors.background, borderColor: theme.colors.border, color: theme.colors.text}]} 
+                   placeholder="Date (MM-DD)" 
+                   placeholderTextColor={theme.colors.inactive}
+                   value={date} 
+                   onChangeText={setDate} 
+                />
+                <TextInput 
+                   style={[styles.input, {flex: 1, backgroundColor: theme.colors.background, borderColor: theme.colors.border, color: theme.colors.text}]} 
+                   placeholder="Time (10AM)" 
+                   placeholderTextColor={theme.colors.inactive}
+                   value={time} 
+                   onChangeText={setTime} 
+                />
              </View>
-             <TextInput style={styles.input} placeholder="Venue or Virtual Link" value={venue} onChangeText={setVenue} />
+             <TextInput 
+                style={[styles.input, { backgroundColor: theme.colors.background, borderColor: theme.colors.border, color: theme.colors.text }]} 
+                placeholder="Venue or Virtual Link" 
+                placeholderTextColor={theme.colors.inactive}
+                value={venue} 
+                onChangeText={setVenue} 
+             />
              
-             {/* Simple Club ID selector mapping */}
-             <TextInput style={styles.input} placeholder="Club ID Selection" value={clubId} onChangeText={setClubId} editable={false} />
-             <Text style={theme.typography.small}>Mocked defaults to your admin club</Text>
+             <TextInput 
+                style={[styles.input, { backgroundColor: theme.colors.background, borderColor: theme.colors.border, color: theme.colors.inactive }]} 
+                placeholder="Club ID Selection" 
+                value={clubId} 
+                onChangeText={setClubId} 
+                editable={false} 
+             />
+             <Text style={[theme.typography.caption, { color: theme.colors.textSecondary, marginBottom: 16 }]}>Mocked defaults to your admin club</Text>
 
              <View style={styles.modalActions}>
                <Button title="Cancel" variant="ghost" style={{flex: 1}} onPress={() => { setModalVisible(false); setEditingEvent(null); }} />
@@ -145,10 +182,15 @@ export default function AdminEventsScreen({ navigation }) {
 
 const getStyles = (theme) => StyleSheet.create({
   container: { flex: 1, backgroundColor: theme.colors.background },
-  cardContainer: { marginHorizontal: 'auto', width: '100%', maxWidth: 500, marginBottom: theme.spacing.m },
-  fabContainer: { position: 'absolute', bottom: theme.spacing.m, right: theme.spacing.m, zIndex: 10 },
+  listContent: { padding: 16, paddingBottom: 100 },
+  cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 },
+  cardActionsContainer: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 16 },
+  cardActions: { flexDirection: 'row', gap: 8 },
+  fabContainer: { position: 'absolute', bottom: 24, right: 24, zIndex: 10 },
+  fabButton: { borderRadius: 100, paddingHorizontal: 24, paddingVertical: 14 },
   modalBg: { flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 100 },
-  modalContent: { backgroundColor: theme.colors.surface, padding: theme.spacing.l, paddingTop: theme.spacing.xl, borderTopLeftRadius: theme.borderRadius.l, borderTopRightRadius: theme.borderRadius.l },
-  input: { backgroundColor: theme.colors.background, padding: theme.spacing.m, borderRadius: theme.borderRadius.m, fontSize: 16, color: theme.colors.text, marginBottom: theme.spacing.m },
-  modalActions: { flexDirection: 'row', gap: theme.spacing.m, marginTop: theme.spacing.m }
+  modalContent: { backgroundColor: theme.colors.surface, padding: 24, paddingTop: 32, borderTopLeftRadius: 24, borderTopRightRadius: 24 },
+  input: { borderWidth: 1, padding: 16, borderRadius: 10, fontSize: 15, marginBottom: 16 },
+  rowInputs: { flexDirection: 'row', gap: 16 },
+  modalActions: { flexDirection: 'row', gap: 16, marginTop: 8 }
 });

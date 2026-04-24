@@ -80,19 +80,19 @@ export default function StudentLoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   backButton: {
     alignSelf: 'flex-start',
-    marginBottom: 24,
+    marginBottom: 20,
     padding: 4,
   },
   header: {
     marginBottom: 32,
   },
   title: {
-    fontSize: 28,
-    fontWeight: '800',
+    fontSize: 24,
+    fontWeight: '700',
     marginBottom: 8,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 15,
   },
   error: {
     marginBottom: 16,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   linkText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
   }
 });

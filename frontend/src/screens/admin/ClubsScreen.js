@@ -77,13 +77,13 @@ export default function AdminClubsScreen() {
   };
 
   const renderItem = ({ item }) => (
-    <Card style={styles.cardContainer}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start'}}>
-         <Text style={[theme.typography.h3, {flex: 1}]}>{item.name}</Text>
+    <Card>
+      <View style={styles.cardHeader}>
+         <Text style={[theme.typography.h3, {flex: 1, color: theme.colors.text}]}>{item.name}</Text>
          <Badge label={`${item.memberCount} Members`} status="primary" />
       </View>
-      <Text style={[theme.typography.caption, {marginTop: theme.spacing.s, marginBottom: theme.spacing.m}]}>{item.description}</Text>
-      <View style={{flexDirection: 'row', justifyContent: 'flex-end', gap: theme.spacing.s}}>
+      <Text style={[theme.typography.body, styles.clubDesc, { color: theme.colors.textSecondary }]}>{item.description}</Text>
+      <View style={styles.cardActions}>
         <Button title="Edit" variant="outline" size="small" onPress={() => openEditModal(item)} />
         <Button title="Delete" variant="danger" size="small" onPress={() => handleDelete(item.id)} />
       </View>
@@ -96,27 +96,42 @@ export default function AdminClubsScreen() {
         data={clubs}
         keyExtractor={c => c.id}
         renderItem={renderItem}
-        contentContainerStyle={{ padding: theme.spacing.m, paddingBottom: 100 }}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
       />
       
       <View style={styles.fabContainer}>
-         <Button title="Create Club" onPress={openCreateModal} icon="plus" style={{ borderRadius: 100 }} />
+         <Button title="Create Club" onPress={openCreateModal} icon="plus" style={styles.fabButton} />
       </View>
 
       <Modal visible={modalVisible} transparent animationType="slide">
         <View style={styles.modalBg}>
           <ScrollView contentContainerStyle={styles.modalContent} keyboardShouldPersistTaps="handled">
              <Text style={theme.typography.h2}>{editingClub ? 'Edit Club' : 'New Club'}</Text>
-             <Text style={[theme.typography.caption, {marginBottom: theme.spacing.l}]}>{editingClub ? 'Update club details' : 'Start a new group on campus'}</Text>
+             <Text style={[theme.typography.caption, {marginBottom: 24, color: theme.colors.textSecondary}]}>{editingClub ? 'Update club details' : 'Start a new group on campus'}</Text>
              
              <View style={styles.inputGroup}>
-               <Text style={styles.label}>Club Name</Text>
-               <TextInput style={styles.input} placeholder="e.g. Finance Society" value={name} onChangeText={setName} />
+               <Text style={[styles.label, { color: theme.colors.textSecondary }]}>Club Name</Text>
+               <TextInput 
+                  style={[styles.input, { backgroundColor: theme.colors.background, color: theme.colors.text, borderColor: theme.colors.border }]} 
+                  placeholder="e.g. Finance Society" 
+                  placeholderTextColor={theme.colors.inactive}
+                  value={name} 
+                  onChangeText={setName} 
+               />
              </View>
 
              <View style={styles.inputGroup}>
-               <Text style={styles.label}>Description</Text>
-               <TextInput style={[styles.input, {height: 80}]} placeholder="What is this club about?" value={desc} onChangeText={setDesc} multiline textAlignVertical="top" />
+               <Text style={[styles.label, { color: theme.colors.textSecondary }]}>Description</Text>
+               <TextInput 
+                  style={[styles.input, {height: 100, backgroundColor: theme.colors.background, color: theme.colors.text, borderColor: theme.colors.border}]} 
+                  placeholder="What is this club about?" 
+                  placeholderTextColor={theme.colors.inactive}
+                  value={desc} 
+                  onChangeText={setDesc} 
+                  multiline 
+                  textAlignVertical="top" 
+               />
              </View>
 
              <View style={styles.modalActions}>
@@ -132,12 +147,16 @@ export default function AdminClubsScreen() {
 
 const getStyles = (theme) => StyleSheet.create({
   container: { flex: 1, backgroundColor: theme.colors.background },
-  cardContainer: { marginHorizontal: 'auto', width: '100%', maxWidth: 500 },
-  fabContainer: { position: 'absolute', bottom: theme.spacing.m, right: theme.spacing.m, zIndex: 10 },
+  listContent: { padding: 16, paddingBottom: 100 },
+  cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
+  clubDesc: { marginTop: 8, marginBottom: 16 },
+  cardActions: { flexDirection: 'row', justifyContent: 'flex-end', gap: 12 },
+  fabContainer: { position: 'absolute', bottom: 24, right: 24, zIndex: 10 },
+  fabButton: { borderRadius: 100, paddingHorizontal: 24, paddingVertical: 14 },
   modalBg: { flex: 1, justifyContent: 'flex-end', backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 100 },
-  modalContent: { backgroundColor: theme.colors.surface, padding: theme.spacing.l, borderTopLeftRadius: theme.borderRadius.l, borderTopRightRadius: theme.borderRadius.l },
-  inputGroup: { marginBottom: theme.spacing.m },
-  label: { ...theme.typography.small, fontWeight: 'bold', marginBottom: 4, marginLeft: 4 },
-  input: { backgroundColor: theme.colors.background, padding: theme.spacing.m, borderRadius: theme.borderRadius.m, fontSize: 16, color: theme.colors.text },
-  modalActions: { flexDirection: 'row', gap: theme.spacing.m, marginTop: theme.spacing.m }
+  modalContent: { backgroundColor: theme.colors.surface, padding: 24, borderTopLeftRadius: 24, borderTopRightRadius: 24 },
+  inputGroup: { marginBottom: 16 },
+  label: { ...theme.typography.small, fontWeight: '600', marginBottom: 8, marginLeft: 4 },
+  input: { borderWidth: 1, padding: 16, borderRadius: 10, fontSize: 15 },
+  modalActions: { flexDirection: 'row', gap: 16, marginTop: 16 }
 });
