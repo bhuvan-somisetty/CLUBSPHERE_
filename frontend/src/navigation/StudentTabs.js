@@ -29,6 +29,7 @@ function EventsStack() {
 
 const TABS = [
   { name: 'Home',       component: HomeScreen,        icon: 'home-variant',     label: 'Home'    },
+  { name: 'Clubs',      component: ClubsScreen,       icon: 'google-circles-extended', label: 'Clubs'  },
   { name: 'Schedule',   component: EventsStack,       icon: 'calendar-star',    label: 'Schedule'},
   { name: 'Scan QR',    component: ScanQRScreen,      icon: 'qrcode-scan',      label: 'Scan QR' },
   { name: 'Attendance', component: LeaderboardScreen, icon: 'clipboard-check',  label: 'Attendance'},
