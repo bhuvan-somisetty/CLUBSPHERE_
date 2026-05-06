@@ -32,7 +32,7 @@ const TABS = [
   { name: 'Clubs',      component: ClubsScreen,       icon: 'google-circles-extended', label: 'Clubs'  },
   { name: 'Schedule',   component: EventsStack,       icon: 'calendar-star',    label: 'Schedule'},
   { name: 'Scan QR',    component: ScanQRScreen,      icon: 'qrcode-scan',      label: 'Scan QR' },
-  { name: 'Attendance', component: LeaderboardScreen, icon: 'clipboard-check',  label: 'Attendance'},
+  { name: 'Ranks',      component: LeaderboardScreen, icon: 'trophy',           label: 'Ranks'   },
   { name: 'Profile',    component: ProfileScreen,     icon: 'account-circle',   label: 'Me'      },
 ];
 
